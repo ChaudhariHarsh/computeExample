@@ -8,7 +8,7 @@ using namespace std;
 GLuint VAO, VBO;
 SDL_Event e;
 SDL_Window* window = nullptr;
-
+bool quit = false;
 
 int main()
 {
@@ -38,6 +38,37 @@ int main()
 
 	glClearColor(1.0f, 0.0f, 0.0f, 1.0f);	//clear screen
 	glClear(GL_COLOR_BUFFER_BIT);
+	
+	while (!quit)
+	{
+		while (SDL_PollEvent(&e) != 0)
+		{
+			switch (e.type)
+			{
+			case SDL_QUIT:	//if X windowkey is pressed then quit
+				quit = true;
+			
+			case SDL_KEYDOWN :	//if ESC is pressed then quit
+				
+				switch (e.key.keysym.sym)
+				{
+				case SDLK_ESCAPE:
+					quit = true;
+					break;
+
+				
+
+				case SDLK_e:
+					std::cout << "E pressed \n";
+					break;
+
+				}
+				break;
+				
+			}
+		}
+
+	}
 	SDL_GL_SwapWindow(window);
 
 }
